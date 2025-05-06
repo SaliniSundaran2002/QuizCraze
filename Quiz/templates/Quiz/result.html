@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container text-center">
+        <h2>Quiz Completed</h2>
+        <p>Your score: {{ score }} / {{ total }}</p>
+
+        {% if score == total %}
+        <div class="alert alert-success mt-3">
+            🎉 Great job! You can now proceed to the next level.
+        </div>
+        {% if next_level_number %}
+        <a href="{% url 'quiz' level=level question_id=next_question_id %}" class="btn btn-primary">Next</a>
+
+        {% endif %}
+        {% else %}
+        <div class="alert alert-info mt-3">
+            Keep trying! Reach a score of 5/5 to unlock the next level.
+        </div>
+        <a href="{% url 'quiz' level=level level_number=level_number %}" class="btn btn-secondary">Try Again</a>
+        {% endif %}
+
+
+        </ul>
+
+
+        {% if score == total %}
+        <a href="{% url 'quiz' level=level question_id=next_question_id %}" class="btn btn-primary">Next</a>
+        {% else %}
+        <a href="{% url 'quiz' level=level question_id=1 %}" class="btn btn-secondary">Try Again</a>
+        {% endif %}
+
+
+
+
+    </div>
+</body>
+
+</html>
